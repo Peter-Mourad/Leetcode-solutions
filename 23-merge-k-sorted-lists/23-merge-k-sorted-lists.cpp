@@ -11,20 +11,25 @@
 class Solution {
 public:
     ListNode* mergeKLists(vector<ListNode*>& lists) {
-        multiset<int> s;
-        for(auto list : lists){
-            if(list==nullptr)continue;
-            while(list->next!=nullptr){
-                s.insert(list->val);
-                list = list->next;
-            }
-            s.insert(list->val);
+        int n = lists.size();
+        set<pair<int,int> > s;
+        for(int i = 0;i < n;i++){
+            if(lists[i]==nullptr)continue;
+            s.insert({lists[i]->val, i});
+            lists[i] = lists[i]->next;
         }
-        ListNode* ans = new ListNode();
-        auto temp = ans;
-        for(auto it = s.begin();it!=s.end();it++){
-            ans->next = new ListNode(*it);
-            ans = ans->next;            
+        ListNode *ans = new ListNode();
+        auto temp= ans;
+        while(!s.empty()){
+            auto p = *s.begin();
+            s.erase(p);
+            if(lists[p.second]!=nullptr){
+                s.insert({lists[p.second] -> val, p.second});
+                lists[p.second] = lists[p.second]->next;
+            }
+            ans->next = new ListNode();
+            ans = ans->next;
+            ans->val = p.first;
         }
         return temp->next;
     }
