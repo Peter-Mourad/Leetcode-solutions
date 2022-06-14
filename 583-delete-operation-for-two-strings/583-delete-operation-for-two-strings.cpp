@@ -8,10 +8,7 @@ public:
         return dp[i][j] = max(solve(i - 1, j, x, y), solve(i, j - 1, x, y));
     }
     int minDistance(string w1, string w2) {
-        for(int i = 0;i < w1.size();i++){
-            for(int j = 0;j < w2.size();j++)
-                dp[i][j] = -1;
-        }
+        memset(dp,-1,sizeof dp);
         return w1.size() + w2.size() - solve(w1.size() - 1, w2.size() - 1, w1, w2);
     }
 };
