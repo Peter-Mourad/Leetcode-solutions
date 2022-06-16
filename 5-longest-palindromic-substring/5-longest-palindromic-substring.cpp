@@ -17,7 +17,7 @@ public:
         int mx = 1;
         pair<int,int> res;
         for(int i = 0;i < s.size();i++){
-            for(int j = i + 1;j < s.size();j++){
+            for(int j = i + mx;j < s.size();j++){
                 if(solve(i,j,s) > mx){
                     mx = solve(i,j,s);
                     res = {i,j};
