@@ -3,7 +3,7 @@ public:
     int scheduleCourse(vector<vector<int>>& courses) {
         priority_queue<int> q;
         int l = 0;
-        auto comp = [](vector<int>p1,vector<int> p2) ->bool{
+        auto comp = [](vector<int> &p1, vector<int> &p2) ->bool{
             return p1[1] < p2[1];  
         };
         sort(courses.begin(), courses.end(), comp);
