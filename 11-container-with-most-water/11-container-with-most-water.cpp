@@ -1,25 +1,22 @@
+int min(int &a, int &b){
+    if(a < b)return a;
+    return b;
+}
+int max(int &a, int &b){
+    if(a > b)return a;
+    return b;
+}
 class Solution {
 public:
     int maxArea(vector<int>& height) {
         int n = height.size();
-        map<int,int> l,r;
-        for(int i = 0;i < n;i++){
-            r[height[i]] = i + 1;
-            if(!l[height[i]])
-                l[height[i]] = i + 1;
-        }
-        auto it = l.end();
-        int mn = 1e9,mx = 0;
         int ans = 0;
-        while(it!=l.begin()){
-            it--;
-            if((*it).second < mn)
-                mn = (*it).second;
-            if(r[(*it).first] > mx)
-                mx = r[(*it).first];
-            
-            if(ans < (mx - mn) * ((*it).first))
-                ans = (mx - mn) * ((*it).first);
+        for(int l = 0,r = n - 1;l<=r;){
+            ans = max(ans,min(height[l],height[r]) * (r - l));
+            if(height[l] < height[r])
+                l++;
+            else
+                r--;
         }
         return ans;
     }
