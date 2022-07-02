@@ -1,4 +1,5 @@
 #define ll long long
+const int mod = 1e9 + 7;
 class Solution {
 public:
     ll maxArea(int h, int w, vector<int>& horizontalCuts, vector<int>& verticalCuts) {
@@ -13,9 +14,7 @@ public:
         for(int i = 1;i<horizontalCuts.size();i++)
             mx2 = max(mx2, 1ll * horizontalCuts[i] - horizontalCuts[i - 1]);
         mx2 = max(mx2, 1ll * h - horizontalCuts.back());
-        int mod = 1e9 + 7;
-        mx %= mod, mx2 %= mod;
-        mx = mx * mx2 % mod;
-        return mx;
+        int ans = (mx % mod) * (mx2 % mod) % mod;
+        return ans;
     }
 };
