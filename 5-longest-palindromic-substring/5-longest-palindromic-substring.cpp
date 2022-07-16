@@ -1,33 +1,32 @@
 class Solution {
 public:
     int dp[1000][1000];
-    int solve(int i, int j, string &s){
-        int &ret = dp[i][j];
-        if(i > j)return 0;
-        if(~ret)return ret;
-        if(i==j)return ret = 1;
-        if(s[i]==s[j])return ret = 2 + solve(i + 1,j - 1, s);
-        return ret = -1e9;
+    int solve(int l,int r, string &s){
+        // base case
+        if(l >= r)return 1;
+        // checking state is answered before
+        if(dp[l][r]!=-1)return dp[l][r];
+        // initialize
+        dp[l][r] = 0;
+        // getting answer
+        if(s[l]==s[r])
+            return dp[l][r] = solve(l + 1,r - 1,s);
+        return dp[l][r] = 0;
     }
     string longestPalindrome(string s) {
+        memset(dp,-1,sizeof dp);
+        int mx = 0;
+        string ans;
         for(int i = 0;i < s.size();i++){
-            for(int j = i;j < s.size();j++)
-                dp[i][j] = -1;
-        }
-        int mx = 1;
-        pair<int,int> res;
-        for(int i = 0;i < s.size();i++){
-            for(int j = i + mx;j < s.size();j++){
-                if(solve(i,j,s) > mx){
-                    mx = solve(i,j,s);
-                    res = {i,j};
+            string temp = "";
+            for(int j = i;j < s.size();j++){
+                temp+=s[j];
+                if(solve(i,j,s) && j - i + 1 > mx){
+                    ans = temp;
+                    mx = j - i + 1;
                 }
             }
         }
-        string ans = "";
-        for(int i = res.first;i <= res.second;i++)
-            ans+=s[i];
-        
         return ans;
     }
 };
