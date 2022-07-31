@@ -1,14 +1,14 @@
 class NumArray {
 public:
     
-    int t[120000], n;
-    void build(int i, int l, int r, vector<int> &x){
+    int t[120000], n, x[30000];
+    void build(int i, int l, int r){
         if(l == r) {
             t[i] = x[l];return;
         }
         int mid = (l + r) / 2;
-        build(i * 2 + 1, l, mid, x);
-        build(i * 2 + 2, mid + 1, r, x);
+        build(i * 2 + 1, l, mid);
+        build(i * 2 + 2, mid + 1, r);
         t[i] = (t[i * 2 + 1] + t[i * 2 + 2]);
     }
     int query(int i,int l,int r,int s,int e){
@@ -31,7 +31,9 @@ public:
     
     NumArray(vector<int>& nums) {
         n = nums.size();
-        build(0,0,nums.size() - 1,nums);
+        for(int i = 0;i < n;i++)
+            x[i] = nums[i];
+        build(0,0,n - 1);
     }
     
     void update(int index, int val) {
