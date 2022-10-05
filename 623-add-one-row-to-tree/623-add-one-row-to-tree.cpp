@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-    void dfs(TreeNode* cur, int depth, int need_depth, int val){
+    void dfs(TreeNode* cur, int depth, int& need_depth, int& val){
         if(depth==need_depth){
             TreeNode* new_node = new TreeNode(val);
             TreeNode* temp = cur->left;
@@ -39,7 +39,7 @@ public:
                 new_root->left = root;
             return new_root;
         }
-        dfs(root, 1, depth - 1, val);
+        dfs(root, 1, --depth, val);
         return root;
     }
 };
