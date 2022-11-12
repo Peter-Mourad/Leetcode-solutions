@@ -1,6 +1,6 @@
 class MedianFinder {
 public:
-    int cnt = 0;
+    int cnt = 0,num2;
     multiset<int> f, s;
     MedianFinder() {
         
@@ -15,7 +15,7 @@ public:
             }
             else{
                 auto it = s.begin();
-                int num2 = *it;
+                num2 = *it;
                 if(num2 < num){
                     s.erase(it);
                     f.insert(num2);
@@ -28,7 +28,7 @@ public:
         else{ 
             auto it = f.end();
             it--;
-            int num2 = *it;
+            num2 = *it;
             if(num2 > num){
                 f.erase(it);
                 f.insert(num);
