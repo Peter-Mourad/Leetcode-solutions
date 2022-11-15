@@ -15,10 +15,8 @@ public:
         if(root==nullptr)
             return 0;
         int ans = 1;
-        if(root->left!=nullptr)
-            ans+=countNodes(root->left);
-        if(root->right!=nullptr)
-            ans+=countNodes(root->right);
+        ans += countNodes(root->left);
+        ans += countNodes(root->right);
         return ans;
     }
 };
