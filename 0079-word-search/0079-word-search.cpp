@@ -24,7 +24,6 @@ public:
                 if(board[i][j]==word[0]){
                     if(dfs(i, j, 0, word, board))
                         return 1;
-                    cout<<endl;
                 }
             }
         }
