@@ -12,10 +12,10 @@ public:
             pq.pop();
             if(d > dis[i][j]) continue;
             for(int k = 0;k < 4;k++){
-                int nx = i + dx[k], ny = j + dy[k];
+                int nx = i + dx[k], ny = j + dy[k], cost = !(k + 1==grid[i][j]);
                 if(nx >= 0 && ny >= 0 && nx < n && ny < m && 
-                dis[nx][ny] > d + !(k + 1==grid[i][j])){
-                    dis[nx][ny] = d + !(k + 1==grid[i][j]);
+                dis[nx][ny] > d + cost){
+                    dis[nx][ny] = d + cost;
                     pq.emplace(dis[nx][ny], nx, ny);
                 }
             }
