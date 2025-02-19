@@ -5,7 +5,8 @@ using namespace __gnu_pbds;
 class Solution {
 public:
     ordered_set res;
-    void solve(int i, int n, string &cur){
+    void solve(int i, int &n, int &k, string &cur){
+        if(res.size() == k) return;
         if(i==n){
             res.insert(cur);
             return;
@@ -13,14 +14,14 @@ public:
         for(char ch = 'a';ch<='c';ch++){
             if(cur=="" || cur.back()!=ch){
                 cur += ch;
-                solve(i + 1, n, cur);
+                solve(i + 1, n, k, cur);
                 cur.pop_back();
             }
         }
     }
     string getHappyString(int n, int k) {
         string cur = "";
-        solve(0, n, cur);
+        solve(0, n, k, cur);
         return (res.size() < k ? "" : *(res.find_by_order(k - 1)));
     }
 };
